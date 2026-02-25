@@ -1,0 +1,173 @@
+{
+  "data": {
+    "base_dir": "./data",
+    "parquet_dir": "./data/parquet",
+    "cache_dir": "./data/cache",
+    "industry_dir": "./data/industry",
+    "reports_dir": "./data/reports"
+  },
+  "collector": {
+    "tdx_top_nodes": 5,
+    "tdx_timeout": 3.0,
+    "tdx_bars_per_req": 800,
+    "tdx_total_bars": 2500,
+    "tdx_workers": 8,
+    "tdx_batch_sleep_every": 50,
+    "tdx_batch_sleep_min": 1.0,
+    "tdx_batch_sleep_max": 3.0,
+    "akshare_workers": 2,
+    "akshare_delay_min": 0.5,
+    "akshare_delay_max": 2.5,
+    "akshare_max_retries": 3,
+    "akshare_ratelimit_wait": 60,
+    "baostock_delay_min": 0.5,
+    "baostock_delay_max": 1.0,
+    "baostock_max_retries": 3,
+    "min_bars_threshold": 10,
+    "adjust": "hfq"
+  },
+  "backtest": {
+    "initial_cash": 1000000.0,
+    "commission_rate": 0.0003,
+    "slippage_rate": 0.001,
+    "tax_rate": 0.001,
+    "position_limit": 20,
+    "max_position_pct": 0.2
+  },
+  "risk": {
+    "max_drawdown": 0.2,
+    "max_position_pct": 0.1,
+    "industry_limit": 0.3,
+    "stop_loss_pct": 0.1,
+    "take_profit_pct": 0.2,
+    "trailing_stop_pct": 0.05,
+    "circuit_breaker_cooldown_days": 5
+  },
+  "factors": {
+    "rsrs": {
+      "regression_window": 18,
+      "zscore_window": 600,
+      "enable": true
+    },
+    "alpha": {
+      "momentum_window": 20,
+      "volatility_window": 20,
+      "enable": true
+    }
+  },
+  "strategy": {
+    "rebalance_freq": "daily",
+    "top_n": 20,
+    "min_score": 0.0
+  },
+  "sector": {
+    "sector_dir": "./data/sector",
+    "ak_workers": 2,
+    "ak_delay_min": 0.5,
+    "ak_delay_max": 1.0,
+    "ak_max_retries": 3,
+    "ak_ratelimit_wait": 30,
+    "_comment": "V7.6新增板块数据采集配置节。sector_dir为板块数据根目录；ak_*参数控制AKShare限流退避。"
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "./logs/q-unity.log"
+  },
+  "realtime": {
+    "scan_interval_seconds": 300,
+    "universe": "all",
+    "watchlist": [],
+    "auto_execute": false,
+    "feed": {
+      "enabled": true,
+      "interval_seconds": 3,
+      "source": "tdx",
+      "batch_size": 80,
+      "use_node_scanner": true,
+      "tdx_top_n": 5,
+      "tdx_node_list": []
+    },
+    "active_strategies": ["rsrs_momentum", "kunpeng_v10"],
+    "signal_merge_rule": "any",
+    "strategy_params": {
+      "rsrs_momentum": {
+        "top_n": 10,
+        "rsrs_threshold": 0.5
+      },
+      "alpha_hunter": {
+        "top_n": 15,
+        "min_score": 0.3
+      },
+      "rsrs_advanced": {
+        "top_n": 10,
+        "rsrs_threshold": 0.5,
+        "r2_threshold": 0.7
+      },
+      "short_term": {
+        "top_n": 5,
+        "hold_calendar_days": 7,
+        "mom_threshold": 0.03
+      },
+      "momentum_reversal": {
+        "top_n": 10,
+        "market_thresh": 0.0
+      },
+      "sentiment_reversal": {
+        "top_n": 10,
+        "oversold_z": -1.5,
+        "overbought_z": 1.5
+      },
+      "kunpeng_v10": {
+        "top_n": 15,
+        "illiq_window": 20,
+        "smart_window": 10,
+        "breadth_limit": 0.15
+      },
+      "alpha_max_v5_fixed": {
+        "top_n": 20,
+        "ep_weight": 0.20,
+        "growth_w": 0.15,
+        "mom_w": 0.15,
+        "quality_w": 0.20,
+        "rev_w": 0.10,
+        "liq_w": 0.10,
+        "res_vol_w": 0.10
+      }
+    },
+    "alert": {
+      "log_file": "./logs/realtime_alerts.log",
+      "enable_email": false,
+      "email_smtp_host": "smtp.qq.com",
+      "email_smtp_port": 465,
+      "email_smtp_ssl": true,
+      "email_from": "",
+      "email_password": "",
+      "email_to": [],
+      "enable_dingtalk": false,
+      "dingtalk_webhook": "",
+      "enable_telegram": false,
+      "telegram_bot_token": "",
+      "telegram_chat_id": "",
+      "enable_wechat_work": false,
+      "wechat_work_webhook": "",
+      "dedup_window_seconds": 300
+    },
+    "trading": {
+      "mode": "simulate",
+      "initial_cash": 1000000.0,
+      "commission_rate": 0.0003,
+      "slippage_rate": 0.0005,
+      "stamp_tax": 0.001,
+      "positions_file": "./data/realtime/positions.json",
+      "max_positions": 20,
+      "max_position_pct": 0.1,
+      "max_daily_loss_pct": 0.05,
+      "min_signal_score": 0.5
+    },
+    "risk": {
+      "stop_loss_pct": 0.08,
+      "take_profit_pct": 0.20,
+      "trailing_stop_pct": 0.05
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "run_id": "20260224_151525",
+  "start_time": "2026-02-24T15:15:25.648789",
+  "end_time": "2026-02-24T15:21:31.929356",
+  "elapsed_s": 366.28,
+  "total": 5190,
+  "success": 5186,
+  "failed": 4,
+  "skipped": 0,
+  "validation_failures": 4,
+  "source_counts": {
+    "tdx": 5186,
+    "akshare": 0,
+    "baostock": 0,
+    "merged": 0
+  },
+  "failed_detail": {
+    "603284": {
+      "market": 1,
+      "reason": "validate:too_few_rows:5"
+    },
+    "688816": {
+      "market": 1,
+      "reason": "validate:too_few_rows:4"
+    },
+    "688712": {
+      "market": 1,
+      "reason": "validate:too_few_rows:8"
+    },
+    "688818": {
+      "market": 1,
+      "reason": "validate:too_few_rows:5"
+    }
+  },
+  "validation_failure_detail": {
+    "603284": "too_few_rows:5",
+    "688816": "too_few_rows:4",
+    "688712": "too_few_rows:8",
+    "688818": "too_few_rows:5"
+  }
+}
